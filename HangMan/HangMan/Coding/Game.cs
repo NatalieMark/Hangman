@@ -43,20 +43,21 @@ namespace HangMan
 					cm.PrintAnswerLine();
 					Console.Write("Take a guess, what letter is missing?: ");
 
-					bool guess = cm.IsMatching(theWord);
-
-					if (guess == false)
+					if (cm.IsMatching(theWord) == false)
 						wrongGuess = 1;
 					else
 						wrongGuess = 0;
 
-					bool won = cm.CheckingIfWon();
-
-					if (won == true)
+					/*if (cm.CheckingIfWon(theWord) == true)
 					{
+						Console.Clear();
 						hp.Won();
-						_running = false;
+						hp.PrintArray(i);
+						cm.PrintAnswerLine();
+						Console.ReadLine();
+						Play();
 					}
+					*/
 				}
 			}
 		}

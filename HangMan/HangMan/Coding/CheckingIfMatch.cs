@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 
+
+
 namespace HangMan
 {
 	public class CheckingIfMatch
@@ -16,8 +18,9 @@ namespace HangMan
 		int j = 0;
 
 		/// <summary>
-		/// Fills the chararray "answerLine" with underscore -
+		/// Fills the chararray "answerLine" with underscore 
 		/// Since it has to look empty.
+		/// But not where there is spaces.
 		/// </summary>
 		/// <param name="input">Input.</param>
 		public void FillingAnswerLineWithUnderscore(char[] input)
@@ -25,6 +28,7 @@ namespace HangMan
 			lengthOfWord = input.Length;
 			for (int i = 0; i < lengthOfWord; i++)
 				answerLine[i] = '_';
+			CheckingIfSpace(input);
 		}
 
 		/// <summary>
@@ -39,14 +43,15 @@ namespace HangMan
 		/// </param>
 		public bool IsMatching(char[] input)
 		{
-			var userInput = Console.ReadLine().ToCharArray();
+			var userInput = Console.ReadKey();
+			if (userInput.Key == ConsoleKey.Enter)
+				IsMatching(input);
 
-			char theLetter = userInput[0];
 			int checkingFail = 0;
 
 			for (int i = 0; i < lengthOfWord; i++)
 			{
-				if (input[i] == theLetter)
+				if (input[i] == userInput.KeyChar)
 				{
 					answerLine[i] = input[i];
 					checkingFail++;
@@ -55,13 +60,12 @@ namespace HangMan
 
 			if (checkingFail == 0)
 			{
-				wrongAnswerLine[j++] = theLetter;
+				wrongAnswerLine[j++] = userInput.KeyChar;
 				return false;
 			}
 			else
 				return true;
 		}
-		// boremaskine til vægge
 
 		/// <summary>
 		/// Prints the answer line.
@@ -79,20 +83,42 @@ namespace HangMan
 			Console.WriteLine();
 		}
 
-		public bool CheckingIfWon()
+		/// <summary>
+		/// Checking if the player won.
+		/// </summary>
+		/// <returns>
+		/// <c>true</c>, if the player won, <c>false</c> otherwise.
+		/// </returns>
+		public bool CheckingIfWon(char[] input)
 		{
 			int won = 0;
 
 			for (int i = 0; i < lengthOfWord; i++)
 			{
-				if (answerLine[i] != '_')
+				if (answerLine[i] == input[i])
 					won++;
+				else
+					won = 0;
 			}
 
-			if (won == answerLine.Length)
+			if (won == lengthOfWord)
 				return true;
 			else
 				return false;	
+		}
+
+		/// <summary>
+		/// If the word contains a space, add that space.
+		/// (So the user doesn't have to guess ' ')
+		/// </summary>
+		/// <param name="input">Input.</param>
+		public void CheckingIfSpace(char[] input)
+		{
+			for (int i = 0; i < lengthOfWord; i++)
+			{
+				if (input[i] == ' ')
+					answerLine[i] = input[i];
+			} 
 		}
 	}
 }
