@@ -57,6 +57,8 @@ namespace HangMan
 		/// </summary>
 		public void Start()
 		{
+			Console.WriteLine($"You know what to do");
+		
 			Console.WriteLine("\n\n\n\n\n\n" +
 			                  "   __________________\n" +
 			                  "  /                 /|\n" +

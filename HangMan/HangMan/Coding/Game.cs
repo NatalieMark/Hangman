@@ -34,21 +34,20 @@ namespace HangMan
 			while (_running)
 			{
 				//For each wrong letter, print new hangman picture.
-				for (int i = 0; i < theWord.Length; i += wrongGuess)
+				for (int i = 0; i < theWord.Length + wrongGuess; i += wrongGuess)
 				{
 					Console.Clear();
 					//missingLetters = new String('_', theWord.Length-i);
 					//Console.WriteLine($"Word: {missingLetters}\n");
 					hp.PrintArray(i);
 					cm.PrintAnswerLine();
-					Console.Write("Take a guess, what letter is missing?: ");
 
 					if (cm.IsMatching(theWord) == false)
 						wrongGuess = 1;
 					else
 						wrongGuess = 0;
 
-					/*if (cm.CheckingIfWon(theWord) == true)
+					if (cm.CheckingIfWon(theWord) == true)
 					{
 						Console.Clear();
 						hp.Won();
@@ -57,7 +56,7 @@ namespace HangMan
 						Console.ReadLine();
 						Play();
 					}
-					*/
+
 				}
 			}
 		}
