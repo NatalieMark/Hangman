@@ -38,6 +38,7 @@
     <Compile Include="Coding\Game.cs" />
     <Compile Include="Coding\GenerateWord.cs" />
     <Compile Include="Coding\CheckingIfMatch.cs" />
+    <Compile Include="Coding\Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Printing\" />

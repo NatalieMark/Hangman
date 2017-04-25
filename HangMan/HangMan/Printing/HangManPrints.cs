@@ -209,12 +209,16 @@ namespace HangMan
 							  " /_________________/ /\n" +
 							  " |                 |/\n" +
 							  " ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
-			Console.WriteLine("     GAME OVER");
 		}
 
 		public void Won()
 		{ 
 			Console.WriteLine("CONGRATULATIONS! YOU WON!");
+		}
+
+		public void Lost()
+		{
+			Console.WriteLine("     GAME OVER");
 		}
 	}
 }

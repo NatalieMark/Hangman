@@ -12,14 +12,15 @@ namespace HangMan
 		{
 		}
 
-		GenerateWord gw = new GenerateWord();
-		HangManPrints hp = new HangManPrints();
-		CheckingIfMatch cm = new CheckingIfMatch();
+		Menu 			m	= new Menu();
+		GenerateWord 	gw 	= new GenerateWord();
+		HangManPrints 	hp 	= new HangManPrints();
+		CheckingIfMatch cm 	= new CheckingIfMatch();
 
-		private bool _running = true;	//The game will run until the dead or success.
-		public string missingLetters;	//How many letters to guess are left.
-		public int correctGuss = 0;     //How many correct letters are guessed.
-		public int wrongGuess = 0;
+		private bool _running = false;	//The game will run until the dead or success.
+		public int 	correctGuss = 0;    //How many correct letters are guessed.
+		public int 	wrongGuess = 0;		//If the latest guess was wrong
+		public int 	totalWrongGuess = 0;//How many total wrong guesses
 
 
 		/// <summary>
@@ -27,6 +28,8 @@ namespace HangMan
 		/// </summary>
 		public void Play()
 		{
+			_running = true;
+
 			// The generated word that has to be guessed is "theWord".
 			char[] theWord = gw.RandomWord().ToCharArray();
 			cm.FillingAnswerLineWithUnderscore(theWord);
@@ -34,39 +37,47 @@ namespace HangMan
 			while (_running)
 			{
 				//For each wrong letter, print new hangman picture.
-				for (int i = 0; i < theWord.Length + wrongGuess; i += wrongGuess)
+				for (int i = 0; i < theWord.Length + totalWrongGuess; i += wrongGuess)
 				{
 					Console.Clear();
-					//missingLetters = new String('_', theWord.Length-i);
-					//Console.WriteLine($"Word: {missingLetters}\n");
+
 					hp.PrintArray(i);
 					cm.PrintAnswerLine();
 
 					if (cm.IsMatching(theWord) == false)
+					{
 						wrongGuess = 1;
+						totalWrongGuess += 1;
+					}
 					else
 						wrongGuess = 0;
-
+					
 					if (cm.CheckingIfWon(theWord) == true)
-					{
-						Console.Clear();
-						hp.Won();
-						hp.PrintArray(i);
-						cm.PrintAnswerLine();
-						Console.ReadLine();
-						Play();
-					}
+						Winning(i);
 
+					if (i == 7)
+						Loosing(i);
 				}
 			}
 		}
 
-		public void Winning()
+		public void Winning(int i)
 		{
-			
+			Console.Clear();
+			hp.Won();
+			hp.PrintArray(i);
+			cm.PrintAnswerLine();
+			Console.WriteLine();
+			m.RunAgain();
 		}
 
-		public void Loosing()
-		{ }
+		public void Loosing(int i)
+		{ 
+			Console.Clear();
+			hp.Dead();
+			hp.Lost();
+			Console.WriteLine();
+			m.RunAgain();
+		}
 	}
 }

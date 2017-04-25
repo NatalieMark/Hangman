@@ -6,12 +6,8 @@ namespace HangMan
 	{
 		public static void Main(string[] args)
 		{
-			
-			Game g = new Game();
-			g.Play();
-
-			//CheckingIfMatch c = new CheckingIfMatch();
-			//c.IsMatching("hello");
+			Menu m = new Menu();
+			m.Run();
 		}
 	}
 }
