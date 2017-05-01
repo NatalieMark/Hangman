@@ -17,7 +17,6 @@ namespace HangMan
 		HangManPrints 	hp 	= new HangManPrints();
 		CheckingIfMatch cm 	= new CheckingIfMatch();
 
-		private bool _running = false;	//The game will run until the dead or success.
 		public int 	correctGuss = 0;    //How many correct letters are guessed.
 		public int 	wrongGuess = 0;		//If the latest guess was wrong
 		public int 	totalWrongGuess = 0;//How many total wrong guesses
@@ -28,7 +27,7 @@ namespace HangMan
 		/// </summary>
 		public void Play()
 		{
-			_running = true;
+			bool _running = true;
 
 			// The generated word that has to be guessed is "theWord".
 			char[] theWord = gw.RandomWord().ToCharArray();

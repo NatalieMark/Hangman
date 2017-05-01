@@ -26,7 +26,7 @@ namespace HangMan
 				"hello", 
 				"how are you today", 
 				"i am great thanks for asking", 
-				"can i get you something?", 
+				"can i get you something", 
 				"no i am fine", 
 				"how do you do", 
 				"i like trains", 
@@ -45,7 +45,7 @@ namespace HangMan
 				"i forgot to stuff", 
 				"this is just a test", 
 				"testing", 
-				"this i exausting", 
+				"this is exausting", 
 				"i hate typing", 
 				"but it is not that bad", 
 				"i dont type slow", 
@@ -56,7 +56,11 @@ namespace HangMan
 				"please", 
 				"dont", 
 				"this is a sentence", 
-				"sentences" 
+				"sentences",
+                "minecraft",
+                "cult",
+                "I need energy",
+                "rubics cube"
 			};
 			return words[rnd.Next(0,words.Length)];
 		}
